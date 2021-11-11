@@ -1,0 +1,34 @@
+# created by fftool
+tolerance 2.5
+filetype xyz
+output simbox.xyz
+
+structure 4-equil_pack.xyz
+  number 1
+  center 
+  fixed 27 27 27 0 0 0
+end structure
+
+# assume that anywhere between 20 and 30 is close to the cage
+# but account for tolerances, as fftool does
+structure phos_pack.xyz
+  number 1
+  center 
+  fixed 27 27 27 0 0 0
+  # inside box 23.5000 23.5000 23.5000 31.5000 31.5000 31.5000
+end structure
+
+structure no3_pack.xyz
+  number 4
+  inside box 23.5000 23.5000 23.5000 31.5000 31.5000 31.5000
+end structure
+
+structure dmso_pack.xyz
+  number 500
+  inside box 1.5000 1.5000 1.5000 52.5000 52.5000 52.5000
+end structure
+
+structure water_pack.xyz
+  number 2000
+  inside box 1.5000 1.5000 1.5000 52.5000 52.5000 52.5000
+end structure

@@ -1,0 +1,22 @@
+ATOMS
+PO    PO    30.974   1.4504   lj    4.30   1.17152
+OP    OP    15.999  -0.9833   lj    3.40   0.29288
+OHP   OHP   15.999  -0.8091   lj    3.70   0.33472
+HOP   HOP   1.008    0.3086   lj    0.00   0.00000
+
+BONDS
+OP  PO    harm   1.570   3598.2
+OHP PO    harm   1.570   3598.2
+HOP OHP   cons   0.940   4184.0
+
+ANGLES
+OP PO  OHP  cons   109.47  1046.0
+PO OHP HOP  cons   115.0   418.4
+OP PO OP    cons   109.47  1046.0
+
+DIHEDRALS
+HOP OHP PO OP  opls   0.0000    0.0000    0.0000    0.0000
+# OP PO OHP HOP  opls   0.0000    0.0000    0.0000    0.0000
+
+IMPROPERS
+

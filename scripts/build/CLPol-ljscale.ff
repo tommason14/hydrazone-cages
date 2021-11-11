@@ -1,0 +1,69 @@
+SCALE_SIGMA 0.985
+
+MONOMERS
+# monomer charge dipole_moment polarizability
+# polarizability is not necessary for fragments without charge and dipole
+#  +/- in name is not necessary
+# cations
+# methyl pyridinium as the pyridine section of each cage
+pyr          1      0.8393     10.496
+# anions
+oac        -1      3.1851     5.705
+no3         -1      0.0000    4.761
+hpo4        -2      2.7869    8.766
+so4         -2      0.2655    7.802
+# neutral
+dmso         0      3.8514   7.769
+water        0      2.0249   1.382
+# exp water dipole = 1.85, but here we'll use the calculated value to be consistent
+
+DIMERS
+# monomer1 monomer2 COM_distance/Å
+# cation-anion
+pyr         no3     2.78721
+pyr         so4     3.09813
+pyr         hpo4    3.10822
+pyr         dmso    4.46504
+pyr         oac     3.26372
+# also no pyr-water sapt value - sapt0 total energy asymptotic to distance, no minimum value
+dmso        oac        3.96276
+dmso        no3        3.53449
+dmso        hpo4       3.86711
+dmso        so4        4.69491
+dmso	    dmso	3.912
+water       dmso       3.37486
+water       so4        3.19564
+water       hpo4       3.19055
+water       no3        3.25506
+water       oac        3.20329
+
+K_SAPT2
+# monomer1 monomer2 k_SAPT2+
+# cation-anion
+pyr         no3     0.56997
+pyr         so4     0.39957
+pyr         hpo4    0.37528
+pyr         dmso    0.55605
+pyr         oac     0.42485
+dmso        oac     0.41058
+dmso        no3     0.55540   
+dmso        hpo4    0.38070   
+dmso        so4     0.29753   
+dmso	    dmso    0.70
+water       dmso    0.46999
+water       so4     0.39255   
+water       hpo4    0.35956   
+water       no3     0.49100
+water       oac     0.44931 
+
+ATOMS
+# cation
+pyr      C2HP NAP CAPO CAPM CAPP HAP 
+# anion
+oac      HC O2 CTA CO2
+no3      NO ON
+hpo4     PO OP OHP HOP
+so4      SO OS4
+dmso     CSZ OY SZ HC
+# netural
+water    OW HW

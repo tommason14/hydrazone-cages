@@ -1,0 +1,34 @@
+#!/bin/bash
+#SBATCH --ntasks=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --mem=4G
+#SBATCH --gres=gpu:P100:1
+#SBATCH --time=10:00:00
+#SBATCH --partition=gpu,short
+
+# load modules here, i.e.
+module load openmm
+# compiled with https://github.com/z-gong/openmm-velocityVerlet
+
+base="$(pwd)"
+gro="$base/build/conf.gro"
+psf="$base/build/topol.psf"
+prm="$base/build/ff.prm"
+
+mkdir init-npt
+cd init-npt
+time python3 $base/run.py --gro $gro --psf $psf --prm $prm -t 300 --thermostat nose-hoover --barostat iso -p 1 -n 1_000_000 >& npt.log
+
+mkdir ../anneal
+cd ../anneal
+time python $base/anneal.py --gro $gro --prm $prm --psf $psf -tmax 500 -tmin 10 -n 5 -tfinal 10 --cpt ../init-npt/cpt.cpt_1000000 >& anneal.log
+
+# already at desired density, so quick run to generate correct velocities (so nvt run starts at 300 K not 10 K)
+mkdir ../npt
+cd ../npt
+time python3 $base/run.py --gro $gro --psf $psf --prm $prm -t 300 --thermostat nose-hoover --barostat iso -p 1 -n 100_000 --cpt ../anneal/cpt.cpt_8500000 >& npt.log
+
+# actual production run
+mkdir ../nvt
+cd ../nvt
+time python3 $base/run.py --gro $gro --psf $psf --prm $prm -t 300 --thermostat nose-hoover --barostat no -n 10_000_000 --cpt ../npt/cpt.cpt_8600000 >& nvt.log
