@@ -96,7 +96,11 @@ def gen_simulation(
     is_drude = any(type(f) == mm.DrudeForce for f in system.getForces())
 
     ### apply TT damping for CLPol force field
-    donors = [atom.idx for atom in psf.atom_list if atom.attype == "HO"]
+    donors = [
+        atom.idx
+        for atom in psf.atom_list
+        if atom.attype.startswith("HO") or atom.attype == "HW"
+    ]
     if is_drude and len(donors) > 0:
         print("Add TT damping between HO and Drude dipoles")
         ttforce = oh.CLPolCoulTT(system, donors)
