@@ -17,11 +17,11 @@ prm="$base/build/ff.prm"
 
 mkdir init-npt
 cd init-npt
-time python3 $base/run.py --gro $gro --psf $psf --prm $prm -t 300 --thermostat nose-hoover --barostat iso -p 1 -n 1_000_000 >& npt.log
+time python3 $base/run.py --gro $gro --psf $psf --prm $prm -t 300 --thermostat nose-hoover --barostat iso -p 1 -n 1_000_000 --min 100 >& npt.log
 
 mkdir ../anneal
 cd ../anneal
-time python $base/anneal.py --gro $gro --prm $prm --psf $psf -tmax 500 -tmin 10 -n 5 -tfinal 10 --cpt ../init-npt/cpt.cpt_1000000 >& anneal.log
+time python3 $base/anneal.py --gro $gro --prm $prm --psf $psf -tmax 500 -tmin 10 -n 5 -tfinal 10 --cpt ../init-npt/cpt.cpt_1000000 >& anneal.log
 
 # already at desired density, so quick run to generate correct velocities (so nvt run starts at 300 K not 10 K)
 mkdir ../npt
