@@ -15,4 +15,4 @@ explained in depth in the supporting information.
 ## Structures extracted from simulations 
 
 Each subfolder within [cage-3](cage-3) and [cage-4](cage-4) contains the 5 lowest-energy structures extracted from 10 ns NVT
-simulations, run after simulated annealing between 10 and 500 K over 5 steps.
+simulations, run after simulated annealing between 10 and 500 K over 5 steps with ions placed in the cavity of each cage, not randomly positioned anywhere in the simulation box.
